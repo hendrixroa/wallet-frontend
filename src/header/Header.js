@@ -4,9 +4,9 @@ import './Header.css';
 class Header extends Component {
   render() {
     return (
-      <div className="Header">
+      <header className="Header">
         <h2>Welcome to React</h2>
-      </div>
+      </header>
     );
   }
 }
