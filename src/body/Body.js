@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import './Body.css';
+import Login from '../login/Login';
 
 class Body extends Component {
   render() {
     return (
-      <p className="Body-intro">
-          Your prefer site e-wallet 
-      </p>
+      <div className="Body">
+          <p className="Body-intro">Your prefer site e-wallet</p>  
+          <Login />
+      </div>
     );
   }
 }
