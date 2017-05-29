@@ -14,7 +14,6 @@ class Body extends Component {
     return (
       <HashRouter>
         <div className="Body">
-            <p className="Body-intro">Your prefer site e-wallet</p>  
             <Route exact path="/" component={Login} />
             <Route path="/admin" component={Admin} />
             <Route path="/dashboard" component={Dashboard} />

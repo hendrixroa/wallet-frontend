@@ -1,0 +1,9 @@
+.Amount{
+    padding: 0%;
+    border: 2px solid gray;
+    border-radius: 5px;
+    width: 10%;
+    text-align: center;
+    float: right;
+    margin: 1%;
+}

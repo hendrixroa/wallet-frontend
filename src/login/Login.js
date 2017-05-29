@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import toastr from 'toastr';
 import $ from 'jquery';
-import 'toastr/build/toastr.min.css';
 import './Login.css';
 
 class Login extends Component {

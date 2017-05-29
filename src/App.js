@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'toastr/build/toastr.min.css';
 import './App.css';
 import Body from './body/Body';
 import Header from './header/Header';
