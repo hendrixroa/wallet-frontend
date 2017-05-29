@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import toastr from 'toastr';
 import $ from 'jquery';
+import 'toastr/build/toastr.min.css';
 import './Login.css';
 
 class Login extends Component {
@@ -28,19 +30,22 @@ class Login extends Component {
 
 	handleSubmit(event){
 		event.preventDefault();
-
 		let values = document.querySelectorAll('[name=password],[name=username]');
-		console.log(values);
 		
 		$.ajax({
 			url : this.api + '/login',
 			type: 'post',
 			data: 'username=' + values[0].value + '&password=' + values[1].value,
-			success : data => {
-				console.log(data);
+			success : data => {	 
+				if(data.user != ''){
+					toastr.success('¡You are Logged!', 'Login Successfully');
+					window.location.href = '/#/dashboard';
+				}else{
+					toastr.error('The username or password are invalids', 'Wrong data');
+				}
 			},
 			error: err =>{
-				console.log(err);
+				toastr.warning('Error connecting with server, try later');
 			}
 		});
 	}

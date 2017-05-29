@@ -1,14 +1,25 @@
 import React, { Component } from 'react';
+import {
+  HashRouter,
+  Route,
+  Link
+} from 'react-router-dom';
 import './Body.css';
 import Login from '../login/Login';
+import Admin from '../admin/Admin';
+import Dashboard from '../dashboard/Dashboard';
 
 class Body extends Component {
   render() {
     return (
-      <div className="Body">
-          <p className="Body-intro">Your prefer site e-wallet</p>  
-          <Login />
-      </div>
+      <HashRouter>
+        <div className="Body">
+            <p className="Body-intro">Your prefer site e-wallet</p>  
+            <Route exact path="/" component={Login} />
+            <Route path="/admin" component={Admin} />
+            <Route path="/dashboard" component={Dashboard} />
+        </div>
+      </HashRouter>  
     );
   }
 }
