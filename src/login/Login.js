@@ -36,7 +36,7 @@ class Login extends Component {
 			type: 'post',
 			data: 'username=' + values[0].value + '&password=' + values[1].value,
 			success : data => {	 
-				if(data.user != ''){
+				if(data.user !== ''){
 					toastr.success('¡You are Logged!', 'Login Successfully');
 					window.location.href = '/#/dashboard';
 				}else{

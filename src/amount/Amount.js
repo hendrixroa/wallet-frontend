@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import io from 'socket.io-client';
 import './Amount.css';
+let socket = io('http://localhost:8080');
 
 class Amount extends Component {
 
@@ -7,14 +9,19 @@ class Amount extends Component {
 		super(props);
 
 		this.state = {
-			total: ''
-		};  
-  }  
+			total: 1000
+		}; 
+
+    socket.on('broadcast', data => {
+      console.log('Received data from server '+ data);
+      this.setState({ total: data });
+    }); 
+  }
 
   render() {
     return (
       <div className="Amount">
-       <p>$ 1000</p>
+       <p>$ {this.state.total}</p>
       </div>
     );
   }
