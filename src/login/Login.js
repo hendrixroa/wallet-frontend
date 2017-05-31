@@ -38,6 +38,7 @@ class Login extends Component {
 			success : data => {	 
 				if(data.user !== ''){
 					toastr.success('¡You are Logged!', 'Login Successfully');
+					sessionStorage.setItem('user', JSON.stringify(data.user));
 					window.location.href = '/#/dashboard';
 				}else{
 					toastr.error('The username or password are invalids', 'Wrong data');
