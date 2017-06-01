@@ -8,6 +8,7 @@ import './Body.css';
 import Login from '../login/Login';
 import Admin from '../admin/Admin';
 import Dashboard from '../dashboard/Dashboard';
+import LoadAndRetireMoney from '../load-and-retire-money/LoadAndRetireMoney';
 
 class Body extends Component {
   render() {
@@ -17,6 +18,7 @@ class Body extends Component {
             <Route exact path="/" component={Login} />
             <Route path="/admin" component={Admin} />
             <Route path="/dashboard" component={Dashboard} />
+            <Route path="/load-and-retire-money" component={LoadAndRetireMoney} />
         </div>
       </HashRouter>  
     );

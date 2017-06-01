@@ -30,7 +30,7 @@ class Amount extends Component {
     });
 
     socket.on('broadcast', data => {
-      if(userLogin.id == data.id_user){
+      if(userLogin.id === data.id_user){
         this.setState({ total: data.money });
       }
     }); 
