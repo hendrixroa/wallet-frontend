@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import toastr from 'toastr';
 import $ from 'jquery';
-import './Admin.css';
+import './Transactions-history.css';
 
-class Admin extends Component {
+class TransactionsHistory extends Component {
 
   constructor(props){
     super(props);
@@ -16,7 +16,7 @@ class Admin extends Component {
     let userLogged = JSON.parse(sessionStorage.getItem('user'));
 
     $.ajax({
-      url : this.api + '/requests',
+      url : this.api + '/transactions/user/' + userLogged.id,
       type: 'get',
       success : data => {	 				
         if(data.transactions !== null){
@@ -38,25 +38,26 @@ class Admin extends Component {
         <div className="col-md-6 col-md-offset-3">
           <div className="panel panel-info">
             <div className="panel-heading">
-              <b>Your Retire History</b>
+              <b>Your Transactions History</b>
             </div>
               <div className="panel-body">
                 <table className="table">
                   <thead>
                     <tr>
-                      <th># Retire</th>
+                      <th># Transaction</th>
                       <th>Date</th>
+                      <th>Type</th>
                       <th>Quantity</th>	
                     </tr>
                   </thead>
                   <tbody>
                       {
                         this.state.transactions.map((transaction,index) => {
-                          return (
-                            <tr key={ transaction.id }> 
-                              <td>{transaction.id}</td>
-                              <td>{transaction.date.slice(0,10)}</td>
-                              <td>{transaction.quantity}</td> 
+                          return (<tr key={ transaction.id }> 
+                            <td>{transaction.id}</td>
+                            <td>{transaction.date.slice(0,10)}</td>
+                            <td>{transaction.type}</td>
+                            <td>{transaction.quantity}</td> 
                             </tr>
                           )
                         })
@@ -71,4 +72,4 @@ class Admin extends Component {
   }
 }
 
-export default Admin;
+export default TransactionsHistory;

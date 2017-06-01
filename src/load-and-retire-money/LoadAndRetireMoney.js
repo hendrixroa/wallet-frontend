@@ -41,12 +41,13 @@ class LoadAndRetireMoney extends Component {
 			type: 'post',
 			data: 'quantity=' + this.state.quantity + '&operation=' + this.state.operation + '&date=' + new Date().toISOString().slice(0, 10) +
 			 '&id_requester=' + this.userLogged.id,
-			success : data => {	 
-				if(data.status !== 'saved'){
-					toastr.success('¡You Wallet is already added¡', 'Wallet added');
+			success : data => {
+				if(data.status === 'saved'){
+					toastr.success('¡You Operation '+ this.state.operation +' has been processed¡', 'Request Processed');
 					window.location.href = '/#/dashboard';
 				}else if(data.status == 'in-progress'){
 					toastr.info('Your requests has send, wait for an admin...');
+					window.location.href = '/#/dashboard';
 				}
 			},
 			error: err =>{

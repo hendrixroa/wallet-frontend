@@ -9,16 +9,20 @@ import Login from '../login/Login';
 import Admin from '../admin/Admin';
 import Dashboard from '../dashboard/Dashboard';
 import LoadAndRetireMoney from '../load-and-retire-money/LoadAndRetireMoney';
+import TransactionsHistory from '../transactions-history/Transactions-history';
+import TotalRetired from '../total-retired/Total-retired';
 
 class Body extends Component {
   render() {
     return (
       <HashRouter>
-        <div className="Body">
+        <div className="container-fluid">
             <Route exact path="/" component={Login} />
             <Route path="/admin" component={Admin} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/load-and-retire-money" component={LoadAndRetireMoney} />
+            <Route path="/transactions-history" component={TransactionsHistory} />
+            <Route path="/total-retired" component={TotalRetired} />
         </div>
       </HashRouter>  
     );

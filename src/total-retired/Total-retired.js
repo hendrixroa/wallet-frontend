@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import toastr from 'toastr';
 import $ from 'jquery';
-import './Admin.css';
+import './Total-retired.css';
 
-class Admin extends Component {
+class TotalRetired extends Component {
 
   constructor(props){
     super(props);
@@ -16,7 +16,7 @@ class Admin extends Component {
     let userLogged = JSON.parse(sessionStorage.getItem('user'));
 
     $.ajax({
-      url : this.api + '/requests',
+      url : this.api + '/transactions/user/' + userLogged.id,
       type: 'get',
       success : data => {	 				
         if(data.transactions !== null){
@@ -71,4 +71,4 @@ class Admin extends Component {
   }
 }
 
-export default Admin;
+export default TotalRetired;

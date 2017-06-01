@@ -7,16 +7,18 @@ class Dashboard extends Component {
 
   constructor(props){
 		super(props);
-    
-    this.getValue = this.getValue.bind(this);
-	}
+  }
 
-  getValue(){
-    console.log(this.refs.amount.state.total);
+  goTotalRetired(){
+    window.location.href = '/#/total-retired';
   }
 
   goFormRetireAndRetireMoney(){
     window.location.href = '/#/load-and-retire-money';
+  }
+
+  goTransactionsHistory(){
+    window.location.href = '/#/transactions-history';
   }
 
   render() {
@@ -27,12 +29,11 @@ class Dashboard extends Component {
 				</div>
         <div className="row">
           <div className="btn-group-vertical col-xs-7 col-xs-offset-2 col-sm-4 col-sm-offset-4">
-						<button type="button" className="btn btn-default" onClick={this.getValue}>Total Money retired</button>
-						<button type="button" className="btn btn-default">Transactions History</button>
+						<button type="button" className="btn btn-default" onClick={this.goTotalRetired}>Total Money retired</button>
+						<button type="button" className="btn btn-default" onClick={this.goTransactionsHistory}>Transactions History</button>
 						<button type="button" className="btn btn-default" onClick={this.goFormRetireAndRetireMoney}>Load/Retirement Money</button>
 					</div>
         </div>
-       
       </div>
     );
   }
