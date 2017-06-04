@@ -16,12 +16,12 @@ class TotalRetired extends Component {
     let userLogged = JSON.parse(sessionStorage.getItem('user'));
 
     $.ajax({
-      url : this.api + '/transactions/user/' + userLogged.id,
+      url : this.api + '/transactions/user/' + userLogged.id + '/retire',
       type: 'get',
       success : data => {	 				
-        if(data.transactions !== null){
+        if(data.retirements !== null){
           this.setState({
-            transactions: data.transactions
+            transactions: data.retirements
           });
         }
         
