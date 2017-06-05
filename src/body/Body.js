@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import {
   HashRouter,
-  Route,
-  Link
+  Route
 } from 'react-router-dom';
 import './Body.css';
 import Login from '../login/Login';

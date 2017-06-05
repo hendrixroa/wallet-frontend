@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
 import $ from 'jquery';
+import toastr from 'toastr';
 import './Amount.css';
 let api = 'http://localhost:8080';
 let socket = io(api);
@@ -30,7 +31,8 @@ class Amount extends Component {
     });
 
     socket.on('broadcast', data => {
-      if(userLogin.id === data.id_user){
+      if(userLogin.id === Number(data.id_user)){
+        toastr.success('Your retirement has been aproved!', 'Retirement aproved');
         this.setState({ total: data.money });
       }
     }); 

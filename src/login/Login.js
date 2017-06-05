@@ -36,11 +36,11 @@ class Login extends Component {
 			type: 'post',
 			data: 'username=' + values[0].value + '&password=' + values[1].value,
 			success : data => {	 
-				if(data.user !== '' && data.user.is_admin == 0){
+				if(data.user !== '' && data.user.is_admin === 0){
 					toastr.success('¡You are Logged!', 'Login Successfully');
 					sessionStorage.setItem('user', JSON.stringify(data.user));
 					window.location.href = '/#/dashboard';
-				}else if(data.user !== '' && data.user.is_admin == 1){
+				}else if(data.user !== '' && data.user.is_admin === 1){
 					toastr.success('¡You are Logged!', 'Login Successfully');
 					sessionStorage.setItem('user', JSON.stringify(data.user));
 					window.location.href = '/#/admin';

@@ -4,3 +4,11 @@
   padding: 20px;
   color: white;
 }
+
+.btn-home{
+  float: left;
+}
+
+.btn-logout{
+  float: right;
+}

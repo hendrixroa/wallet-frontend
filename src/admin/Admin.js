@@ -11,13 +11,18 @@ class Admin extends Component {
     this.state = {
       requests: [],
       status:'',
-      message: ''
+      message: '',
+      itemSelected: -1
     };
   
     this.api = 'http://localhost:8080';
     this.userLogged = JSON.parse(sessionStorage.getItem('user'));
-    this.addMessage = this.addMessage.bind(this);
+    this.handleChangeMessage = this.handleChangeMessage.bind(this);
 
+    this.loadRequests();
+  }
+
+  loadRequests(){
     $.ajax({
       url : this.api + '/requests',
       type: 'get',
@@ -35,12 +40,45 @@ class Admin extends Component {
     });
   }
 
-  addMessage(){
-    console.log(this.refs.message.value);
+  addMessage(req, id){
+    if(this.state.message === ''){
+      document.getElementById('buttonSend'+this.state.itemSelected).disabled= true;
+      toastr.error('The message is required!','Message required');
+    }else{
+      document.getElementById('buttonSend'+this.state.itemSelected).disabled= false;
+      //send a message
+      $.ajax({
+      url : this.api + '/requests/admin/' + this.userLogged.id,
+      type: 'POST',
+      data:  'id=' + req.id + '&id_requester=' + req.id_requester + '&date=' +
+       req.date.slice(0,10) + '&quantity=' + req.quantity + '&operation=' + req.operation +
+       '&state=rejected' + '&message=' + this.state.message,
+      success : data => {	 				
+        if(data.request === 'rejected'){
+          toastr.info('The request has been rejected');
+          this.setState({
+            requests: this.state.requests.filter((req,index) => { return index === id ? false: true})
+          });
+        }
+      },
+      error: err =>{
+        toastr.warning('Error connecting with server, try later');
+        console.log(err);
+      }
+      });
+    }  
   }
 
-  handleChangeMessage(event){
-    console.log(event);
+  handleChangeMessage(event, id){
+    this.setState({
+      message: event.target.value
+    });
+    if(event.target.value === ''){
+      document.getElementById('buttonSend'+this.state.itemSelected).disabled= true;
+      toastr.error('The message is required!','Message required');
+    }else{
+      document.getElementById('buttonSend'+this.state.itemSelected).disabled= false;
+    }   
   }
 
   acceptRequest( req, id){
@@ -52,7 +90,7 @@ class Admin extends Component {
        '&state=accept',
       success : data => {	 				
         if(data.status === 'saved'){
-          toastr.success('The request has been updated','Request updated');
+        toastr.success('The request has been updated','Request updated');
           this.setState({
             requests: this.state.requests.filter((req,index) => { return index === id ? false: true})
           });
@@ -65,34 +103,13 @@ class Admin extends Component {
     });
   }
 
-  rejectRequest(req, id){
+  rejectRequest(id){
     this.setState({
-      status: 'reject'
-    });
-    //this.refs.buttonAccept.style.display = 'none';
-    //this.refs.buttonReject.style.display = 'none';
-
-    console.log(id);
-    return id;
-    /*$.ajax({
-      url : this.api + '/requests/admin/' + this.userLogged.id,
-      type: 'POST',
-      data:  'id=' + req.id + '&id_requester=' + req.id_requester + '&date=' +
-       req.date.slice(0,10) + '&quantity=' + req.quantity + '&operation=' + req.operation +
-       '&state=reject' + '&message=' + this.state.message,
-      success : data => {	 				
-        if(data.status === 'saved'){
-          toastr.success('The request has been updated','Request updated');
-          this.setState({
-            requests: this.state.requests.filter((req,index) => { return index === id ? false: true})
-          });
-        }
-      },
-      error: err =>{
-        toastr.warning('Error connecting with server, try later');
-        console.log(err);
-      }
-    });*/
+      status: 'reject',
+      itemSelected: id,
+    }); 
+    document.getElementById('buttonReject'+id).style.display = 'none';
+    document.getElementById('buttonAccept'+id).style.display = 'none';
   }
 
   render() {
@@ -124,27 +141,23 @@ class Admin extends Component {
                               <td>{ request.operation }</td>
                               <td>{ request.quantity }</td>
                               <td>{ request.username }</td>
-                              <td><button className="btn btn-success" onClick={ () => this.acceptRequest(request,index) }>Accept</button></td>
-                              <td><button className="btn btn-danger" onClick={ () => this.rejectRequest(request,index) }>Reject</button></td>
+                              <td><button className="btn btn-success" id={ 'buttonAccept' + index } onClick={ () => this.acceptRequest(request, index) }>Accept</button></td>
+                              <td><button className="btn btn-danger" id={ 'buttonReject' + index } onClick={ () => this.rejectRequest(index) }>Reject</button></td>
                                { 
-                                 this.state.status === 'reject' && this.rejectRequest(request,index) ? (
-                                    <td>
-                                      <td>
+                                 this.state.status === 'reject' && this.state.itemSelected === index ? (
+                                    <td>                          
                                         <div className="input-group" ref="boxMessage">
                                             <span className="input-group-addon" id="basic-addon1">Message</span>
                                             <input type="text" className="form-control" value={this.state.message} name="message" onChange={this.handleChangeMessage}/>
-                                        </div> 
-                                      </td>
-                                      <td>
-                                        <input type="button" ref="buttonSend" className="btn btn-primary" value="Send" onClick={this.addMessage} />
-                                      </td>
+                                        </div><br/>
+                                        <button id={ 'buttonSend' + index } className="btn btn-primary" onClick={ () => this.addMessage(request, index) } >Send</button>             
                                     </td>
                                   ) : null
                                 }
                             </tr>             
                           )
                         })
-                      }
+                      }       
                   </tbody>
                 </table>
               </div>

@@ -45,7 +45,7 @@ class LoadAndRetireMoney extends Component {
 				if(data.status === 'saved'){
 					toastr.success('¡You Operation '+ this.state.operation +' has been processed¡', 'Request Processed');
 					window.location.href = '/#/dashboard';
-				}else if(data.status == 'in-progress'){
+				}else if(data.status === 'in-progress'){
 					toastr.info('Your requests has send, wait for an admin...');
 					window.location.href = '/#/dashboard';
 				}
@@ -70,23 +70,39 @@ class LoadAndRetireMoney extends Component {
 
   render() {
     return (
-			<div>
-				<Amount ref="amount" />
-				<form onSubmit={this.handleSubmit}>
-					<label>
-						Quantity
-					</label>
-					<input type="number" name="quantity" value={this.state.quantity} onChange={this.handleOnChange} /><br/>
-					<label>
-						Select the operation
-						<select name="operation" value={this.state.operation} onChange={this.handleOnChange}>
-							<option value="retirement">Retirement</option>
-							<option value="payment">Payment</option>
-						</select>
-					</label><br/>
-					<button type="submit" ref="buttonSend">Send</button>
-				</form>
+		<div className="row formLoadRetire">
+			<Amount ref="amount" />
+			<div className="col-sm-5 col-sm-offset-4">
+				<h3>Load or retire your money fast!</h3>
 			</div>
+			 <div className="col-md-8 col-sm-offset-4">
+			 	<form onSubmit={this.handleSubmit} className="form-horizontal" >
+					<div className="form-group">
+						<label className="col-sm-2 control-label">
+							Quantity
+						</label>
+						<div className="col-sm-4">
+							<input type="number" className="form-control" name="quantity" value={this.state.quantity} onChange={this.handleOnChange} />
+						</div>	
+					</div>
+					<div className="form-group">
+						<label className="col-sm-2 control-label">
+							Select the operation
+						</label>
+						<div className="col-sm-4">
+							<select name="operation" className="form-control" value={this.state.operation} onChange={this.handleOnChange}>
+								<option value="retirement">Retirement</option>
+								<option value="payment">Payment</option>
+							</select>
+						</div>				
+					</div>
+					<div className="col-md-4 col-sm-offset-2">
+						<button type="submit" className="btn btn-primary" ref="buttonSend">Send</button>
+					</div>
+					
+				</form>
+			 </div>			
+		</div>
     );
   }
 }

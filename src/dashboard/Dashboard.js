@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import $ from 'jquery';
 import './Dashboard.css';
 import Amount from '../amount/Amount';
 
