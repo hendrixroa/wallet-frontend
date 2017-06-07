@@ -57,33 +57,31 @@ class Login extends Component {
 
   render() {
     return (
-				<Form horizontal>
-					<FormGroup controlId="formHorizontalUsername">
-						<Col sm={2}>
-							Username
-						</Col>
-						<Col sm={10}>
-							<FormControl type="text" placeholder="Username" name="username" value={this.state.username} onChange={this.handleOnChange} />
-						</Col>
-					</FormGroup>
-
-					<FormGroup controlId="formHorizontalPassword">
-						<Col sm={2}>
-							Password
-						</Col>
-						<Col sm={10}>
-							<FormControl type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleOnChange} />
-						</Col>
-					</FormGroup>
-
-					<FormGroup>
-						<Col smOffset={2} sm={10}>
-							<Button type="submit">
-								Login
-							</Button>
-						</Col>
-					</FormGroup>
-				</Form>
+		<Form horizontal onSubmit={this.handleSubmit}>
+			<FormGroup controlId="formHorizontalUsername">
+				<Col sm={1} smOffset={4}>
+					Username
+				</Col>
+				<Col sm={2} >
+					<FormControl type="text" placeholder="Username" name="username" value={this.state.username} onChange={this.handleOnChange} />
+				</Col>
+			</FormGroup>
+			<FormGroup controlId="formHorizontalPassword">
+				<Col sm={1} smOffset={4}>
+					Password
+				</Col>
+				<Col sm={2}>
+					<FormControl type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleOnChange} />
+				</Col>
+			</FormGroup>
+			<FormGroup>
+				<Col smOffset={5} sm={2}>
+					<Button type="submit">
+						Login
+					</Button>
+				</Col>
+			</FormGroup>
+		</Form>
     );
   }
 }

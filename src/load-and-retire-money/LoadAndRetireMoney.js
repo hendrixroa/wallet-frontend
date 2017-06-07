@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Amount from '../amount/Amount';
 import toastr from 'toastr';
 import $ from 'jquery';
+import { Button, Form, FormControl, FormGroup, Col } from 'react-bootstrap';
 import './LoadAndRetireMoney.css';
 toastr.options.closeButton = true;
 toastr.options.preventDuplicates = true;
@@ -70,38 +71,39 @@ class LoadAndRetireMoney extends Component {
 
   render() {
     return (
-		<div className="row formLoadRetire">
+		<div>
 			<Amount ref="amount" />
-			<div className="col-sm-5 col-sm-offset-4">
+			<div className="col-sm-5 col-sm-offset-">
 				<h3>Load or retire your money fast!</h3>
 			</div>
-			 <div className="col-md-8 col-sm-offset-4">
-			 	<form onSubmit={this.handleSubmit} className="form-horizontal" >
-					<div className="form-group">
-						<label className="col-sm-2 control-label">
-							Quantity
-						</label>
-						<div className="col-sm-4">
-							<input type="number" className="form-control" name="quantity" value={this.state.quantity} onChange={this.handleOnChange} />
-						</div>	
-					</div>
-					<div className="form-group">
-						<label className="col-sm-2 control-label">
-							Select the operation
-						</label>
-						<div className="col-sm-4">
-							<select name="operation" className="form-control" value={this.state.operation} onChange={this.handleOnChange}>
-								<option value="retirement">Retirement</option>
-								<option value="payment">Payment</option>
-							</select>
-						</div>				
-					</div>
-					<div className="col-md-4 col-sm-offset-2">
-						<button type="submit" className="btn btn-primary" ref="buttonSend">Send</button>
-					</div>
-					
-				</form>
-			 </div>			
+			<Form horizontal onSubmit={this.handleSubmit}>
+				<FormGroup controlId="formHorizontalUsername">
+					<Col sm={1} smOffset={4}>
+						Quantity
+					</Col>
+					<Col sm={2} >
+						<FormControl type="number" placeholder="Quantity" name="quantity" value={this.state.quantity} onChange={this.handleOnChange} />
+					</Col>	
+				</FormGroup>
+				<FormGroup controlId="formControlsSelect">
+					  <Col sm={1} smOffset={4}>
+						Select the operation
+					  </Col>
+					  <Col sm={2}>	
+						<FormControl componentClass="select" placeholder="Operation" value={this.state.operation} onChange={this.handleOnChange}>
+							<option value="retirement">Retirement</option>
+							<option value="payment">Payment</option>
+						</FormControl>
+					  </Col>
+					</FormGroup>
+				<FormGroup>
+					<Col smOffset={5} sm={2}>
+						<Button type="submit">
+							Send
+						</Button>
+					</Col>
+				</FormGroup>
+			</Form>	
 		</div>
     );
   }
