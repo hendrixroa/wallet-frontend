@@ -20,6 +20,10 @@ class Dashboard extends Component {
     window.location.href = '/#/transactions-history';
   }
 
+  goRequests(){
+    window.location.href = '/#/requests';
+  }
+
   render() {
     return (
       <div className="Dashboard">
@@ -31,7 +35,8 @@ class Dashboard extends Component {
 						<button type="button" className="btn btn-default" onClick={this.goTotalRetired}>Total Money retired</button>
 						<button type="button" className="btn btn-default" onClick={this.goTransactionsHistory}>Transactions History</button>
 						<button type="button" className="btn btn-default" onClick={this.goFormRetireAndRetireMoney}>Load/Retirement Money</button>
-					</div>
+            <button type="button" className="btn btn-default" onClick={this.goRequests}>Requests</button>
+          </div>
         </div>
       </div>
     );

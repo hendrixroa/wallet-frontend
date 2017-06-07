@@ -10,6 +10,7 @@ import Dashboard from '../dashboard/Dashboard';
 import LoadAndRetireMoney from '../load-and-retire-money/LoadAndRetireMoney';
 import TransactionsHistory from '../transactions-history/Transactions-history';
 import TotalRetired from '../total-retired/Total-retired';
+import Requests from '../requests/Requests';
 
 class Body extends Component {
   render() {
@@ -22,6 +23,7 @@ class Body extends Component {
             <Route path="/load-and-retire-money" component={LoadAndRetireMoney} />
             <Route path="/transactions-history" component={TransactionsHistory} />
             <Route path="/total-retired" component={TotalRetired} />
+            <Route path="/requests" component={Requests} />
         </div>
       </HashRouter>  
     );

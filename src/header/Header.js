@@ -17,7 +17,7 @@ class Header extends Component {
             <a href="/#/dashboard"><button className="btn btn-info btn-home">Home</button></a>
           ) : null
         }
-        <h2>Wellcome to E-wallet System </h2>   
+        <h2>Wellcome <b>{ JSON.parse(sessionStorage.getItem('user')).username }</b> to E-wallet System </h2>   
          {
            sessionStorage.getItem('user') !== null ? (<button className="btn btn-danger btn-logout" onClick={this.logout}>Logout</button>) : null
          }  

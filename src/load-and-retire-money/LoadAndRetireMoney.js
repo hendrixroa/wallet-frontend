@@ -57,10 +57,10 @@ class LoadAndRetireMoney extends Component {
 	}
 
 	isAvailableAmount(name,value){
-		if(name === 'quantity' && value > this.refs.amount.state.total && this.state.operation === 'retirement'){
+		if(name === 'quantity' && value >= this.refs.amount.state.total && this.state.operation === 'retirement'){
 			this.refs.buttonSend.disabled = true;
 			toastr.error('You dont have these quantity of Money', 'insufficient money');
-		}else if(name === 'operation' && value === 'retirement' && this.state.quantity > this.refs.amount.state.total){
+		}else if(name === 'operation' && value === 'retirement' && this.state.quantity >= this.refs.amount.state.total){
 			this.refs.buttonSend.disabled = true;
 			toastr.error('You dont have these quantity of Money', 'insufficient money');
 		}else{
