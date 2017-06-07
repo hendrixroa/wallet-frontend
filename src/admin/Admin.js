@@ -52,7 +52,7 @@ class Admin extends Component {
       type: 'POST',
       data:  'id=' + req.id + '&id_requester=' + req.id_requester + '&date=' +
        req.date.slice(0,10) + '&quantity=' + req.quantity + '&operation=' + req.operation +
-       '&state=rejected' + '&message=' + this.state.message,
+       '&state=rejected&message=' + this.state.message,
       success : data => {	 				
         if(data.request === 'rejected'){
           toastr.info('The request has been rejected');

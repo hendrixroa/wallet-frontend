@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import toastr from 'toastr';
 import $ from 'jquery';
 import './Login.css';
+import { Form, FormControl, FormGroup, Col, Button } from 'react-bootstrap';
 
 class Login extends Component {
 
@@ -56,17 +57,33 @@ class Login extends Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Username
-        </label>
-				<input type="text" name="username" value={this.state.username} onChange={this.handleOnChange} /><br/>
-				<label>
-					Password
-				</label>
-				<input type="password" name="password" value={this.state.password} onChange={this.handleOnChange} /><br/>
-        <input type="submit" value="Login" />
-      </form>
+				<Form horizontal>
+					<FormGroup controlId="formHorizontalUsername">
+						<Col sm={2}>
+							Username
+						</Col>
+						<Col sm={10}>
+							<FormControl type="text" placeholder="Username" name="username" value={this.state.username} onChange={this.handleOnChange} />
+						</Col>
+					</FormGroup>
+
+					<FormGroup controlId="formHorizontalPassword">
+						<Col sm={2}>
+							Password
+						</Col>
+						<Col sm={10}>
+							<FormControl type="password" placeholder="Password" name="password" value={this.state.password} onChange={this.handleOnChange} />
+						</Col>
+					</FormGroup>
+
+					<FormGroup>
+						<Col smOffset={2} sm={10}>
+							<Button type="submit">
+								Login
+							</Button>
+						</Col>
+					</FormGroup>
+				</Form>
     );
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Header.css';
 import toastr from 'toastr';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
 class Header extends Component {
 
   logout(){
@@ -11,17 +12,26 @@ class Header extends Component {
 
   render() {
     return (
-      <header className="Header">
-        {
-          sessionStorage.getItem('user') !== null && JSON.parse(sessionStorage.getItem('user')).is_admin === 0 ? (
-            <a href="/#/dashboard"><button className="btn btn-info btn-home">Home</button></a>
-          ) : null
-        }
-        <h2>Wellcome <b>{ JSON.parse(sessionStorage.getItem('user')).username }</b> to E-wallet System </h2>   
-         {
-           sessionStorage.getItem('user') !== null ? (<button className="btn btn-danger btn-logout" onClick={this.logout}>Logout</button>) : null
-         }  
-      </header>
+        <Navbar>
+          <Navbar.Header>
+            {
+              sessionStorage.getItem('user') !== null && JSON.parse(sessionStorage.getItem('user')).is_admin === 0 ? (
+                  <Navbar.Brand>
+                  <a href="/#/dashboard">Home</a>
+                  </Navbar.Brand>
+              ) : null
+            }
+          <Navbar.Toggle />
+          <Navbar.Text>
+             <span>Hi <b>{ sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')).username : 'Visitant' }</b> to e-Wallet</span>
+          </Navbar.Text>
+          </Navbar.Header>
+          <Navbar.Collapse>         
+            {
+              sessionStorage.getItem('user') !== null ? (<Nav pullRight><NavItem onClick={this.logout}>Logout</NavItem></Nav>) : null
+            }
+          </Navbar.Collapse>
+        </Navbar>
     );
   }
 }

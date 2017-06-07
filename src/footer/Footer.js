@@ -4,7 +4,7 @@ import './Footer.css';
 class Footer extends Component {
   render() {
     return (
-      <footer className="Footer">
+      <footer className="navbar navbar-default navbar-fixed-bottom Footer">
         <p>&copy; E-wallet All rights reserved</p>
       </footer>
     );
