@@ -97,7 +97,7 @@ class LoadAndRetireMoney extends Component {
 						Select the operation
 					  </Col>
 					  <Col sm={2}>	
-						<FormControl componentClass="select" placeholder="Operation" value={this.state.operation} onChange={this.handleOnChange}>
+						<FormControl componentClass="select" name="operation" placeholder="Operation" value={this.state.operation} onChange={this.handleOnChange}>
 							<option value="retirement">Retirement</option>
 							<option value="payment">Payment</option>
 						</FormControl>

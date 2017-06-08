@@ -31,9 +31,12 @@ class Amount extends Component {
     });
 
     socket.on('broadcast', data => {
-      if(userLogin.id === Number(data.id_user)){
+      if(data.id_user !== null && data.money !== null && Number(userLogin.id) === Number(data.id_user)){
         toastr.success('Your retirement has been aproved!', 'Retirement aproved');
         this.setState({ total: data.money });
+      }
+      if(Number(data.id_user) === Number(userLogin.id) && data.money === null){
+        toastr.error('Your retirement has been Reject!', 'Retirement reject');
       }
     }); 
   }
