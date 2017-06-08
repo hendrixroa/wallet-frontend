@@ -31,6 +31,11 @@ class Login extends Component {
 	handleSubmit(event){
 		event.preventDefault();
 		let values = document.querySelectorAll('[name=password],[name=username]');
+
+		if(values[0].value === '' || values[1].value === ''){
+			toastr.error('The username or password are empty', 'Wrong data');
+			return;
+		}
 		
 		$.ajax({
 			url : this.api + '/login',
@@ -76,7 +81,7 @@ class Login extends Component {
 			</FormGroup>
 			<FormGroup>
 				<Col smOffset={5} sm={2}>
-					<Button type="submit">
+					<Button bsStyle="info" type="submit">
 						Login
 					</Button>
 				</Col>

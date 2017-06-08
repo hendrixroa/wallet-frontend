@@ -40,9 +40,9 @@ class Amount extends Component {
 
   render() {
     return (
-      <div className="Amount">
-       <p>$ {this.state.total}</p>
-      </div>
+      <span className="Amount" ref="amount">
+       Available money <b> <br/> $ {this.state.total}</b>
+      </span>
     );
   }
 }

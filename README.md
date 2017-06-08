@@ -11,3 +11,15 @@ Now, run these commands:
 
 * `npm install` for install all dependencies
 * `npm start` for running this project, by default this project open a window of browser by default in your system in the route `http://localhost:3000` (if the browser not open, open a tab and go the route) because this project was generated it with `create-react-app` (Oficcial [generator](https://github.com/facebookincubator/create-react-app) app for Reacjs)
+
+## Users for Login
+
+With role not admin : 
+
+* **Username:** johnDoe , **Password:** johnDoe
+* **Username:** janeDoe , **Password:** janeDoe
+
+Admins:
+
+* **Username:** admin1 , **Password:** admin1
+* **Username:** admin2 , **Password:** admin2

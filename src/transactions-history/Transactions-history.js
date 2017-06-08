@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import toastr from 'toastr';
 import $ from 'jquery';
 import './Transactions-history.css';
+import { Panel, Table, Col, Row } from 'react-bootstrap';
 
 class TransactionsHistory extends Component {
 
@@ -34,40 +35,35 @@ class TransactionsHistory extends Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-md-6 col-md-offset-3">
-          <div className="panel panel-info">
-            <div className="panel-heading">
-              <b>Your Transactions History</b>
-            </div>
-              <div className="panel-body">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th># Transaction</th>
-                      <th>Date</th>
-                      <th>Type</th>
-                      <th>Quantity</th>	
-                    </tr>
-                  </thead>
-                  <tbody>
-                      {
-                        this.state.transactions.map((transaction,index) => {
-                          return (<tr key={ transaction.id }> 
-                            <td>{transaction.id}</td>
-                            <td>{transaction.date.slice(0,10)}</td>
-                            <td>{transaction.type}</td>
-                            <td>{transaction.quantity}</td> 
-                            </tr>
-                          )
-                        })
-                      }
-                  </tbody>
-                </table>
-              </div>
-          </div>		
-        </div>
-      </div>	
+      <Row>
+        <Col sm={6} smOffset={3} >
+          <Panel header={(<b>Your Transactions History</b>)} bsStyle="info">              
+            <Table responsive>
+              <thead>
+                <tr>
+                  <th># Transaction</th>
+                  <th>Date</th>
+                  <th>Type</th>
+                  <th>Quantity</th>	
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  this.state.transactions.map((transaction,index) => {
+                    return (<tr key={ transaction.id }> 
+                      <td>{transaction.id}</td>
+                      <td>{transaction.date.slice(0,10)}</td>
+                      <td>{transaction.type}</td>
+                      <td>{transaction.quantity}</td> 
+                      </tr>
+                    )
+                  })
+                }
+              </tbody>
+            </Table>
+          </Panel>
+        </Col>
+      </Row>            	
     );
   }
 }

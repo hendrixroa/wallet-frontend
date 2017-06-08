@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Amount from '../amount/Amount';
 import toastr from 'toastr';
 import $ from 'jquery';
-import { Button, Form, FormControl, FormGroup, Col } from 'react-bootstrap';
+import { Form, FormControl, FormGroup, Col} from 'react-bootstrap';
 import './LoadAndRetireMoney.css';
+import Amount from '../amount/Amount';
 toastr.options.closeButton = true;
 toastr.options.preventDuplicates = true;
 
@@ -36,6 +36,11 @@ class LoadAndRetireMoney extends Component {
 
 	handleSubmit(event){
 		event.preventDefault();
+
+		if(this.state.quantity === ''){
+			toastr.error('The Quantity is empty', 'Wrong data');
+			return;
+		}
 		
 		$.ajax({
 			url : this.api + '/requests',
@@ -71,11 +76,13 @@ class LoadAndRetireMoney extends Component {
 
   render() {
     return (
-		<div>
-			<Amount ref="amount" />
-			<div className="col-sm-5 col-sm-offset-">
+		<div>	
+			<Col>
+				<Amount ref='amount'/>
+			</Col>
+			<Col sm={5} smOffset={3}>
 				<h3>Load or retire your money fast!</h3>
-			</div>
+			</Col>
 			<Form horizontal onSubmit={this.handleSubmit}>
 				<FormGroup controlId="formHorizontalUsername">
 					<Col sm={1} smOffset={4}>
@@ -98,12 +105,10 @@ class LoadAndRetireMoney extends Component {
 					</FormGroup>
 				<FormGroup>
 					<Col smOffset={5} sm={2}>
-						<Button type="submit">
-							Send
-						</Button>
+						<button className="btn btn-primary" ref='buttonSend' type="submit">Send</button>
 					</Col>
 				</FormGroup>
-			</Form>	
+			</Form>
 		</div>
     );
   }

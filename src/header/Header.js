@@ -23,8 +23,9 @@ class Header extends Component {
             }
           <Navbar.Toggle />
           <Navbar.Text>
-             <span>Hi <b>{ sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')).username : 'Visitant' }</b> to e-Wallet</span>
+             <span id="text-wellcome">Hi <b>{ sessionStorage.getItem('user') ? JSON.parse(sessionStorage.getItem('user')).username : 'Visitant' }</b> to e-Wallet </span>
           </Navbar.Text>
+         
           </Navbar.Header>
           <Navbar.Collapse>         
             {

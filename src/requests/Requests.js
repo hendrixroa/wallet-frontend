@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import toastr from 'toastr';
 import $ from 'jquery';
 import './Requests.css';
+import { Table, Panel, Row, Col } from 'react-bootstrap';
 
 class Requests extends Component {
 
@@ -33,44 +34,39 @@ class Requests extends Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-md-6 col-md-offset-3">
-          <div className="panel panel-info">
-            <div className="panel-heading">
-              <b>Your requests history</b>
-            </div>
-              <div className="panel-body">
-                <table className="table">
-                  <thead>
-                    <tr>
-                      <th># Request</th>
-                      <th>Date</th>
-                      <th>Status</th>
-                      <th>Operation</th>
-                      <th>Quantity</th>
-                      <th>Message</th>	
-                    </tr>
-                  </thead>
-                  <tbody>
-                      {
-                        this.state.requests.map((request,index) => {
-                          return (<tr key={ request.id }> 
-                            <td>{request.id}</td>
-                            <td>{request.date.slice(0,10)}</td>
-                            <td>{request.status}</td>
-                            <td>{request.operation}</td>
-                            <td>{request.quantity}</td>
-                            <td>{request.message}</td> 
-                            </tr>
-                          )
-                        })
-                      }
-                  </tbody>
-                </table>
-              </div>
-          </div>		
-        </div>
-      </div>	
+      <Row>
+        <Col sm={6} smOffset={3}>
+          <Panel header={(<b>Your requests history</b>)} bsStyle="info">              
+            <Table responsive>
+              <thead>
+                <tr>
+                  <th># Request</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Operation</th>
+                  <th>Quantity</th>
+                  <th>Message</th>	
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  this.state.requests.map((request,index) => {
+                    return (<tr key={ request.id }> 
+                      <td>{request.id}</td>
+                      <td>{request.date.slice(0,10)}</td>
+                      <td>{request.status}</td>
+                      <td>{request.operation}</td>
+                      <td>{request.quantity}</td>
+                      <td>{request.message}</td> 
+                      </tr>
+                    )
+                  })
+                }
+              </tbody>
+            </Table>
+            </Panel>		
+        </Col>
+      </Row>	
     );
   }
 }

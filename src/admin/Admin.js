@@ -32,7 +32,6 @@ class Admin extends Component {
             requests: data.requests
           });
         }
-        console.log(data);
       },
       error: err =>{
         toastr.warning('Error connecting with server, try later');
@@ -46,6 +45,7 @@ class Admin extends Component {
       toastr.error('The message is required!','Message required');
     }else{
       document.getElementById('buttonSend'+this.state.itemSelected).disabled= false;
+      document.getElementById('boxMessage'+this.state.itemSelected).style.display = 'none';
       //send a message
       $.ajax({
       url : this.api + '/requests/admin/' + this.userLogged.id,
@@ -57,7 +57,10 @@ class Admin extends Component {
         if(data.request === 'rejected'){
           toastr.info('The request has been rejected');
           this.setState({
-            requests: this.state.requests.filter((req,index) => { return index === id ? false: true})
+            requests: this.state.requests.filter((req,index) => { return index === id ? false: true}),
+            itemSelected: -1,
+            status:'',
+            message: ''
           });
         }
       },
@@ -115,7 +118,7 @@ class Admin extends Component {
   render() {
     return (
       <div className="row">
-        <div className="col-md-8 col-md-offset-3">
+        <div className="col-md-8 col-md-offset-2">
           <div className="panel panel-warning">
             <div className="panel-heading">
               <b>Requests of Users</b>
@@ -146,7 +149,7 @@ class Admin extends Component {
                                { 
                                  this.state.status === 'reject' && this.state.itemSelected === index ? (
                                     <td>                          
-                                        <div className="input-group" ref="boxMessage">
+                                        <div className="input-group" id={'boxMessage' + index}>
                                             <span className="input-group-addon" id="basic-addon1">Message</span>
                                             <input type="text" className="form-control" value={this.state.message} name="message" onChange={this.handleChangeMessage}/>
                                         </div><br/>
